@@ -1,0 +1,74 @@
+@import '../variables';
+
+.settings-page {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: $surface-color;
+    padding: $spacing-unit*4;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    color: $text-primary;
+
+    h1 {
+        margin-top: 0;
+    }
+
+    .message {
+        padding: $spacing-unit;
+        margin-bottom: $spacing-unit*2;
+        border-radius: $border-radius;
+
+        &.success {
+            background-color: rgba(green, 0.2);
+            color: lighten(green, 40%);
+        }
+
+        &.error {
+            background-color: rgba(red, 0.2);
+            color: lighten(red, 40%);
+        }
+    }
+
+    .form-group {
+        margin-bottom: $spacing-unit*2;
+
+        label {
+            display: block;
+            margin-bottom: $spacing-unit/2;
+            font-weight: 600;
+            color: $text-primary;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: $spacing-unit*1.5;
+            border-radius: $border-radius;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: darken($background-color, 3%);
+            color: $text-primary;
+            font-family: inherit;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+            }
+        }
+    }
+
+    .save-btn {
+        padding: $spacing-unit*1.5 $spacing-unit*3;
+        background-color: $primary-color;
+        color: white;
+        border-radius: $border-radius;
+        font-size: 1rem;
+        font-weight: 600;
+        width: 100%;
+        margin-top: $spacing-unit;
+        transition: background 0.2s;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+}

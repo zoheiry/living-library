@@ -1,0 +1,89 @@
+@import '../../styles/variables';
+
+.quoteCard {
+    background-color: $surface-color;
+    border-radius: $border-radius;
+    padding: $spacing-unit * 4;
+    margin-bottom: $spacing-unit * 4;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    font-style: italic;
+
+    @include mobile {
+        padding: $spacing-unit * 2;
+        cursor: pointer; // Indicate clickable
+    }
+
+    .quoteIcon {
+        font-size: 4rem;
+        color: rgba($primary-color, 0.2); // Subtle blue tint
+        position: absolute;
+        font-family: serif;
+        line-height: 1;
+
+        &.left {
+            top: $spacing-unit;
+            left: $spacing-unit;
+
+            @include mobile {
+                top: 0;
+                left: 0;
+            }
+        }
+
+        &.right {
+            bottom: $spacing-unit * -1; // Offset slightly
+            right: $spacing-unit * 2;
+
+            @include mobile {
+                bottom: 0;
+                right: 0;
+                line-height: 0;
+            }
+        }
+    }
+
+    blockquote {
+        margin: 0;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+
+        p {
+            margin-bottom: $spacing-unit * 2;
+            transition: all 0.3s ease;
+
+            @include mobile {
+                font-size: 0.9rem;
+
+                // Collapsed state (default)
+                &.collapsed {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                // Expanded state
+                &.expanded {
+                    display: block;
+                    -webkit-line-clamp: unset;
+                    overflow: visible;
+                }
+            }
+        }
+
+        footer {
+            color: $text-secondary;
+            font-size: 1rem;
+            font-weight: 500;
+
+            cite {
+                color: $primary-color;
+                font-style: normal;
+                margin-left: 5px;
+            }
+        }
+    }
+}

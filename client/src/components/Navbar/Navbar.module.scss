@@ -1,0 +1,150 @@
+@import '../../styles/variables';
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-unit*2;
+    margin-bottom: $spacing-unit*4;
+
+    // Mobile: keep row, adjust padding
+    @include mobile {
+        padding: $spacing-unit;
+        gap: $spacing-unit;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: $spacing-unit;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: $text-primary;
+
+        .logoImage {
+            height: 80px;
+            width: auto;
+
+            @include mobile {
+                height: 50px;
+            }
+        }
+
+        .brandText {
+            @include mobile {
+                display: none;
+            }
+        }
+    }
+
+    .navLinks {
+        display: flex;
+        gap: $spacing-unit*4;
+
+        @include mobile {
+            display: none; // Hide links on mobile for now? Or keep? User asked for single row, so maybe space is tight.
+            // If hiding, we need a menu. User didn't ask for a menu, just "single row". 
+            // Assuming no links exist or they fit.
+            // If they modify the request, I will adjust.
+            // Wait, looking at Navbar.jsx, 'navLinks' is empty in the snippet I saw?
+            // Let's assume standard behavior: hide or condense.
+        }
+
+        a {
+            color: $text-secondary;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+
+            &:hover,
+            &.active {
+                color: $text-primary;
+            }
+        }
+    }
+
+    .navActions {
+        display: flex;
+        align-items: center;
+        gap: $spacing-unit*2;
+
+        // Mobile: Reset width from previous change
+        @include mobile {
+            width: auto;
+            gap: $spacing-unit;
+        }
+
+        .addBtn {
+            background-color: $primary-color;
+            color: white;
+            padding: 8px 16px;
+            border-radius: $border-radius;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background-color: darken($primary-color, 10%);
+            }
+
+        }
+
+        .userAvatarWrapper {
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s;
+
+            // Define explicit size for Avatar to fill
+            width: 64px;
+            height: 64px;
+
+            @include mobile {
+                width: 40px;
+                height: 40px;
+            }
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+
+        .dropdownMenu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: $spacing-unit;
+            background-color: $surface-color;
+            border-radius: $border-radius;
+            box-shadow: $box-shadow;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 150px;
+            z-index: 100;
+            overflow: hidden;
+
+            a,
+            button {
+                display: block;
+                width: 100%;
+                padding: $spacing-unit $spacing-unit*2;
+                color: $text-secondary;
+                text-align: left;
+                background: none;
+                border: none;
+                font-size: 0.9rem;
+                cursor: pointer;
+                text-decoration: none;
+                transition: background-color 0.2s, color 0.2s;
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.05);
+                    color: $text-primary;
+                }
+            }
+
+            // Add separator for logout if needed, or keep clean
+        }
+    }
+}

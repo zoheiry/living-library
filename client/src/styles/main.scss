@@ -1,0 +1,30 @@
+@import 'variables';
+
+body {
+    margin: 0;
+    font-family: $font-family;
+    background-color: $background-color;
+    color: $text-primary;
+    -webkit-font-smoothing: antialiased;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-unit*2;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+}

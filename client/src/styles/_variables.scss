@@ -1,0 +1,23 @@
+// Dark Mode Palette (BookCase)
+$background-color: #0f172a; // Dark Slate
+$surface-color: #1e293b; // Lighter Slate (Cards)
+$primary-color: #3b82f6; // Bright Blue
+$secondary-color: #cbd5e1; // Slate 300
+$accent-color: #f59e0b; // Amber (for highlights/warnings)
+
+$text-primary: #ffffff;
+$text-secondary: #94a3b8; // Slate 400
+
+$font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+$spacing-unit: 8px;
+$border-radius: 12px; // Modern rounded corners
+$box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+$mobile: 768px;
+
+@mixin mobile {
+    @media (max-width: $mobile) {
+        @content;
+    }
+}

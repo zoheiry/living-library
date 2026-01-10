@@ -1,0 +1,159 @@
+@import '../../styles/variables';
+
+.searchForm {
+    display: flex;
+    gap: $spacing-unit;
+    margin-bottom: $spacing-unit*2.5;
+
+    input {
+        flex: 1;
+        padding: $spacing-unit;
+        border-radius: $border-radius;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: darken($surface-color, 3%);
+        color: $text-primary;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+        }
+    }
+
+    button {
+        padding: $spacing-unit $spacing-unit*2;
+        background-color: $primary-color;
+        color: white;
+        border-radius: $border-radius;
+        font-weight: 600;
+        transition: background 0.2s;
+
+        &:hover:not(:disabled) {
+            background-color: darken($primary-color, 10%);
+        }
+
+        &:disabled {
+            opacity: 0.7;
+            cursor: default;
+        }
+    }
+}
+
+.resultsList {
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: $border-radius;
+
+    .resultItem {
+        padding: $spacing-unit;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        cursor: pointer;
+        display: flex;
+        gap: $spacing-unit;
+        transition: background 0.2s;
+        color: $text-primary;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        img {
+            height: 50px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .bookInfo {
+            .title {
+                font-weight: bold;
+                margin-bottom: 2px;
+            }
+
+            .authors {
+                font-size: 0.9em;
+                color: $text-secondary;
+            }
+        }
+    }
+}
+
+.confirmForm {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-unit;
+    color: $text-primary;
+
+    h3 {
+        margin-top: 0;
+    }
+
+    .bookPreview {
+        display: flex;
+        gap: $spacing-unit;
+        padding: $spacing-unit;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: $border-radius;
+
+        img {
+            width: 60px;
+            border-radius: 4px;
+        }
+
+        p {
+            margin: 0 0 4px 0;
+        }
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-weight: 500;
+
+        input {
+            padding: $spacing-unit;
+            border-radius: $border-radius;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: darken($surface-color, 3%);
+            color: $text-primary;
+
+            // Hide spin buttons
+            -moz-appearance: textfield;
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+    }
+
+    .addButton {
+        padding: $spacing-unit*1.5;
+        background-color: $primary-color;
+        color: white;
+        border-radius: $border-radius;
+        font-weight: 600;
+        margin-top: $spacing-unit;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+
+    .backButton {
+        padding: $spacing-unit;
+        background-color: transparent;
+        color: $text-secondary;
+        border: 1px solid $text-secondary;
+        border-radius: $border-radius;
+
+        &:hover {
+            color: $text-primary;
+            border-color: $text-primary;
+        }
+    }
+}
