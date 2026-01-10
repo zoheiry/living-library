@@ -41,6 +41,7 @@ export default function Login() {
     return (
         <div className="auth-page">
             <div className="auth-container">
+                <img src="/assets/logo.png" alt="Living Bookshelf Logo" className="auth-logo" />
                 <h1>Login</h1>
                 {error && <div style={{ color: '#ef4444', marginBottom: '15px', background: 'rgba(239, 68, 68, 0.1)', padding: '10px', borderRadius: '8px' }}>{error}</div>}
                 <form onSubmit={handleSubmit}>

@@ -155,24 +155,16 @@ export default function BookDetails() {
                     <h3>{book.Author}</h3>
 
                     {isEditingYear ? (
-                        <div className="edit-year-section" style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            <label style={{ fontSize: '0.9rem', color: '#94a3b8' }}>Year Finished:</label>
+                        <div className="edit-year-section">
+                            <label>Year Finished:</label>
                             <input
                                 type="number"
                                 value={editYear}
                                 onChange={e => setEditYear(e.target.value)}
                                 className="year-input"
-                                style={{
-                                    padding: '6px',
-                                    borderRadius: '4px',
-                                    border: '1px solid #334155',
-                                    background: '#1e293b',
-                                    color: 'white',
-                                    width: '80px'
-                                }}
                             />
-                            <button onClick={handleSaveYear} style={{ background: '#3b82f6', color: 'white', border: 'none', borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontSize: '0.8rem' }}>Save</button>
-                            <button onClick={() => { setIsEditingYear(false); setEditYear(book.DateRead || ''); }} style={{ background: 'transparent', color: '#94a3b8', border: '1px solid #334155', borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontSize: '0.8rem' }}>Cancel</button>
+                            <button onClick={handleSaveYear} className="save-btn">Save</button>
+                            <button onClick={() => { setIsEditingYear(false); setEditYear(book.DateRead || ''); }} className="cancel-btn">Cancel</button>
                         </div>
                     ) : (
                         <div className="date-row" style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '20px' }}>

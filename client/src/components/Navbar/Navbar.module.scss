@@ -1,11 +1,16 @@
 @import '../../styles/variables';
 
+.navbarWrapper {
+    background-color: $surface-color;
+    border-bottom: 1px solid $border-color-subtle;
+    margin-bottom: $spacing-unit*4;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $spacing-unit*2;
-    margin-bottom: $spacing-unit*4;
+    padding: $spacing-unit $spacing-unit*2;
 
     // Mobile: keep row, adjust padding
     @include mobile {
@@ -22,7 +27,7 @@
         color: $text-primary;
 
         .logoImage {
-            height: 80px;
+            height: 60px;
             width: auto;
 
             @include mobile {
@@ -120,13 +125,17 @@
             border-radius: $border-radius;
             box-shadow: $box-shadow;
             border: 1px solid $border-color-subtle;
-            padding: $spacing-unit;
-            text-align: right;
 
             a,
             button {
+                font-size: 1em;
+                color: $text-secondary;
+                padding: $spacing-unit $spacing-unit *2;
+                background-color: transparent;
+                display: block;
+                width: 100%;
+                text-align: left;
 
-                // ...
                 &:hover {
                     background-color: rgba(0, 0, 0, 0.05);
                     color: $text-primary;

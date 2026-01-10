@@ -32,32 +32,34 @@ export default function Navbar({ onAddBook }) {
     }, []);
 
     return (
-        <header className={`${styles.navbar} container`}>
-            <Link to="/" className={styles.brand}>
-                <img src="/assets/logo.png" alt="Logo" className={styles.logoImage} />
-                <span className={styles.brandText}>Living Bookshelf</span>
-            </Link>
+        <header className={styles.navbarWrapper}>
+            <div className={`${styles.navbar} container`}>
+                <Link to="/" className={styles.brand}>
+                    <img src="/assets/logo.png" alt="Logo" className={styles.logoImage} />
+                    <span className={styles.brandText}>Living Bookshelf</span>
+                </Link>
 
-            <div className={styles.navActions}>
-                <button className={styles.addBtn} onClick={onAddBook}>
-                    <span className={styles.btnText}>Add Book</span>
-                </button>
+                <div className={styles.navActions}>
+                    <button className={styles.addBtn} onClick={onAddBook}>
+                        <span className={styles.btnText}>Add Book</span>
+                    </button>
 
-                <div style={{ position: 'relative' }} ref={dropdownRef}>
-                    <div
-                        className={styles.userAvatarWrapper}
-                        title="User Menu"
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                    >
-                        <Avatar index={avatarIndex} />
-                    </div>
-
-                    {dropdownOpen && (
-                        <div className={styles.dropdownMenu}>
-                            <Link to="/settings" onClick={() => setDropdownOpen(false)}>Settings</Link>
-                            <button onClick={handleLogout}>Logout</button>
+                    <div style={{ position: 'relative' }} ref={dropdownRef}>
+                        <div
+                            className={styles.userAvatarWrapper}
+                            title="User Menu"
+                            onClick={() => setDropdownOpen(!dropdownOpen)}
+                        >
+                            <Avatar index={avatarIndex} />
                         </div>
-                    )}
+
+                        {dropdownOpen && (
+                            <div className={styles.dropdownMenu}>
+                                <Link to="/settings" onClick={() => setDropdownOpen(false)}>Settings</Link>
+                                <button onClick={handleLogout}>Logout</button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </header>

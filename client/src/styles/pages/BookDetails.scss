@@ -71,14 +71,51 @@
         }
 
         .edit-year-section {
+            display: flex;
+            align-items: center;
+            gap: $spacing-unit;
+            margin-bottom: $spacing-unit*2;
+
+            label {
+                font-size: 0.9rem;
+                color: $text-secondary;
+            }
+
             input[type=number] {
                 -moz-appearance: textfield;
+                padding: 6px;
+                border-radius: 4px;
+                border: 1px solid $border-color-subtle;
+                background-color: $surface-color;
+                color: $text-primary;
+                width: 80px;
+                font-family: inherit;
 
                 &::-webkit-outer-spin-button,
                 &::-webkit-inner-spin-button {
                     -webkit-appearance: none;
                     margin: 0;
                 }
+            }
+
+            .save-btn {
+                background-color: $primary-color;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                padding: 6px 12px;
+                cursor: pointer;
+                font-size: 0.8rem;
+            }
+
+            .cancel-btn {
+                background: transparent;
+                color: $text-secondary;
+                border: 1px solid $border-color-subtle;
+                border-radius: 4px;
+                padding: 6px 12px;
+                cursor: pointer;
+                font-size: 0.8rem;
             }
         }
 
