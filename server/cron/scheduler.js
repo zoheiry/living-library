@@ -68,8 +68,17 @@ const startScheduler = () => {
                 const preferredTime = settings?.EmailTime || '08:00';
                 const preferredDay = settings?.EmailDay !== undefined ? Number(settings.EmailDay) : 1; // Default Monday
 
-                // Check if it's time to send
-                if (preferredTime === currentTime) {
+                // Check if it's time to send (Window of last 10 minutes)
+                const [prefHour, prefMinute] = preferredTime.split(':').map(Number);
+                const prefTotalMinutes = prefHour * 60 + prefMinute;
+
+                const nowTotalMinutes = now.getHours() * 60 + now.getMinutes();
+
+                // Calculate difference considering midnight wrap-around
+                const diff = (nowTotalMinutes - prefTotalMinutes + 1440) % 1440;
+
+                // If scheduled time was within the last 10 minutes (0 to 9)
+                if (diff >= 0 && diff < 10) {
                     if (frequency === 'daily') {
                         await processUserEmail(user.UserId);
                     } else if (frequency === 'weekly' && currentDay === preferredDay) {
