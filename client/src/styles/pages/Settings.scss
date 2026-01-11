@@ -20,12 +20,12 @@
 
         &.success {
             background-color: rgba(green, 0.2);
-            color: lighten(green, 40%);
+            color: darken(green, 40%);
         }
 
         &.error {
             background-color: rgba(red, 0.2);
-            color: lighten(red, 40%);
+            color: darken(red, 40%);
         }
     }
 

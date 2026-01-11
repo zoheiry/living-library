@@ -42,8 +42,6 @@ const startScheduler = () => {
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const currentTime = `${hours}:${minutes}`;
 
-        console.log(`Checking email schedule for ${currentTime}...`);
-
         try {
             // 1. Scan for all users
             const scanParams = {
