@@ -41,6 +41,11 @@ const startScheduler = () => {
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const currentTime = `${hours}:${minutes}`;
 
+        // Total minutes from midnight
+        const nowTotalMinutes = now.getHours() * 60 + now.getMinutes();
+
+        console.log(`[Scheduler] Waking up. Server Time: ${currentTime} (${nowTotalMinutes} mins)`);
+
         try {
             // 1. Scan for all users
             const scanParams = {
@@ -50,8 +55,11 @@ const startScheduler = () => {
                     ":prefix": "USER#"
                 }
             };
-            const { Items: users } = await docClient.send(new ScanCommand({ TableName: TABLE_NAME }));
+            // FIX: Pass scanParams to ScanCommand
+            const { Items: users } = await docClient.send(new ScanCommand(scanParams));
             const userProfiles = users.filter(item => item.EntityId === 'USER#Profile');
+
+            console.log(`[Scheduler] Found ${userProfiles.length} users.`);
 
             for (const user of userProfiles) {
                 const settingsParams = {
@@ -68,33 +76,37 @@ const startScheduler = () => {
                 const preferredTime = settings?.EmailTime || '08:00';
                 const preferredDay = settings?.EmailDay !== undefined ? Number(settings.EmailDay) : 1; // Default Monday
 
-                // Check if it's time to send (Window of last 10 minutes)
+                // Calculate User Preference in Minutes
                 const [prefHour, prefMinute] = preferredTime.split(':').map(Number);
                 const prefTotalMinutes = prefHour * 60 + prefMinute;
 
-                const nowTotalMinutes = now.getHours() * 60 + now.getMinutes();
-
-                // Calculate difference considering midnight wrap-around
+                // Calculate difference considering midnight wrap-around (1440 mins/day)
+                // (ServerTime - PrefTime + 1440) % 1440
                 const diff = (nowTotalMinutes - prefTotalMinutes + 1440) % 1440;
 
-                console.log('Scheduler: Checking mail settings for: ', user.UserId);
+                console.log(`[Scheduler] Checking User: ${user.UserId}`);
+                console.log(`   - Pref Time: ${preferredTime} (${prefTotalMinutes} mins)`);
+                console.log(`   - Diff: ${diff} mins (Needs 0-9)`);
+
                 // If scheduled time was within the last 10 minutes (0 to 9)
                 if (diff >= 0 && diff < 10) {
-                    console.log('Scheduler: Sending mail to: ', user.UserId);
+                    console.log(`   --> MATCH! Sending email...`);
                     if (frequency === 'daily') {
                         await processUserEmail(user.UserId);
                     } else if (frequency === 'weekly' && currentDay === preferredDay) {
                         await processUserEmail(user.UserId);
                     }
+                } else {
+                    console.log(`   --> No match.`);
                 }
             }
 
         } catch (error) {
-            console.error("Error in scheduler:", error);
+            console.error("[Scheduler] Error:", error);
         }
     });
 
-    console.log("Scheduler started: Checks every minute for scheduled emails");
+    console.log("Scheduler started: Checks every 10 minutes");
 };
 
 module.exports = { startScheduler, processUserEmail };
