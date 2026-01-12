@@ -11,8 +11,6 @@ A personalized digital library to track your reading journey, discover insights 
 - **Smart Extracts**: Automatically generate excerpts from your books using AI (powered by Gemini) if you don't have one handy.
 - **Email Reminders**: (Optional) Configure daily or weekly email delivery of your book excerpts.
 - **Customizable Profile**: Choose a fun avatar from the sprite collection.
-- **Mobile Friendly**: Totally responsive design that works great on your phone.
-- **Dark Mode UI**: Sleek, modern dark-themed interface.
 
 ## Tech Stack
 
