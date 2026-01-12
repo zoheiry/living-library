@@ -65,7 +65,7 @@ Create a `.env` file in the `server` directory with the following variables:
 PORT=5001
 JWT_SECRET=your_super_secret_key
 # AWS Configuration (if not using default profile)
-AWS_REGION=us-east-1
+AWS_REGION=eu-west-3
 DYNAMODB_TABLE_NAME=Books
 USERS_TABLE_NAME=Users
 
