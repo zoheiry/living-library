@@ -1,0 +1,210 @@
+@import '../../styles/variables';
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: $surface-color;
+    width: 600px;
+    height: 80vh;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+
+    @include mobile {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    header {
+        padding: $spacing-unit*2;
+        background-color: $primary-color;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: $spacing-unit;
+        }
+
+        .closeBtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+
+            &:hover {
+                color: lighten($primary-color, 20%);
+            }
+        }
+    }
+
+    .messageList {
+        flex: 1;
+        overflow-y: auto;
+        padding: $spacing-unit*2;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-unit*2;
+        background-color: white; // Chat background
+
+        .message {
+            max-width: 95%;
+            padding: $spacing-unit*1.5;
+            border-radius: $border-radius;
+            line-height: 1.4;
+            font-size: 0.95rem;
+
+            &.user {
+                align-self: flex-end;
+                background-color: lighten($primary-color, 35%); // Very light pink
+                color: $text-primary;
+                border: 1px solid rgba($primary-color, 0.2);
+            }
+
+            &.model {
+                align-self: flex-start;
+                background-color: $surface-color;
+                color: $text-primary;
+                border: 1px solid $border-color-subtle;
+            }
+
+            .timestamp {
+                display: block;
+                font-size: 0.7rem;
+                color: $text-secondary;
+                margin-top: 5px;
+                text-align: right;
+            }
+
+            // Markdown Styles
+            p {
+                margin: 0 0 10px 0;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            ul,
+            ol {
+                margin: 0 0 10px 0;
+                padding-left: 20px;
+            }
+
+            li {
+                margin-bottom: 4px;
+            }
+
+            strong {
+                font-weight: 700;
+            }
+
+            em {
+                font-style: italic;
+            }
+
+            code {
+                background-color: rgba(0, 0, 0, 0.1);
+                padding: 2px 4px;
+                border-radius: 4px;
+                font-family: monospace;
+                font-size: 0.9em;
+            }
+
+            pre {
+                background-color: #f1f5f9;
+                padding: 10px;
+                border-radius: 4px;
+                overflow-x: auto;
+                margin-bottom: 10px;
+
+                code {
+                    background-color: transparent;
+                    padding: 0;
+                }
+            }
+        }
+
+        .typing {
+            align-self: flex-start;
+            font-style: italic;
+            color: $text-secondary;
+            font-size: 0.85rem;
+            margin-left: $spacing-unit;
+        }
+    }
+
+    .inputArea {
+        padding: $spacing-unit*2;
+        background-color: $background-color;
+        border-top: 1px solid $border-color-subtle;
+        display: flex;
+        gap: $spacing-unit;
+
+        input {
+            flex: 1;
+            padding: $spacing-unit*1.5;
+            border-radius: 20px;
+            border: 1px solid $border-color-subtle;
+            background-color: white;
+            font-family: inherit;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+            }
+        }
+
+        button {
+            background-color: $primary-color;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+
+            &:disabled {
+                background-color: $secondary-color;
+                cursor: not-allowed;
+            }
+
+            &:not(:disabled):hover {
+                background-color: darken($primary-color, 10%);
+            }
+
+            svg {
+                width: 20px;
+                height: 20px;
+                fill: currentColor;
+            }
+        }
+    }
+}

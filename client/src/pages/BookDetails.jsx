@@ -4,6 +4,7 @@ import { useBooks } from '../contexts/BooksContext';
 import { useAuth } from '../contexts/AuthContext';
 import { booksApi, excerptApi } from '../api';
 import '../styles/pages/BookDetails.scss';
+import ChatModal from '../components/ChatModal/ChatModal';
 
 export default function BookDetails() {
     const { id } = useParams(); // entityId
@@ -18,6 +19,7 @@ export default function BookDetails() {
     // Separate edit states
     const [isEditingYear, setIsEditingYear] = useState(false);
     const [isEditingNotes, setIsEditingNotes] = useState(false);
+    const [isChatOpen, setIsChatOpen] = useState(false);
 
     const [loading, setLoading] = useState(true);
 
@@ -182,8 +184,19 @@ export default function BookDetails() {
                         </button>
                     </div>
 
+                    <button className="chat-btn" onClick={() => setIsChatOpen(true)}>
+                        Chat with Book
+                    </button>
+
                 </div>
             </div>
+
+            {isChatOpen && (
+                <ChatModal
+                    book={book}
+                    onClose={() => setIsChatOpen(false)}
+                />
+            )}
         </div>
     );
 }

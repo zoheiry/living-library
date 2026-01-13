@@ -106,3 +106,12 @@ export const settingsApi = {
 export const excerptApi = {
     generate: (id, token) => request(`/api/excerpt/${encodeURIComponent(id)}`, { token })
 };
+
+// Chat API
+export const chatApi = {
+    sendMessage: (data, token) => request('/api/chat', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        token
+    })
+};

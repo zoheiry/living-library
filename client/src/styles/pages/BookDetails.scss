@@ -244,5 +244,27 @@
                 }
             }
         }
+
+        .chat-btn {
+            margin-top: $spacing-unit*4;
+            width: 100%;
+            padding: $spacing-unit*2;
+            background-color: $primary-color;
+            color: white;
+            border-radius: $border-radius;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            &:hover {
+                background-color: darken($secondary-color, 10%);
+            }
+
+            // optional icon if I add one later
+        }
     }
 }

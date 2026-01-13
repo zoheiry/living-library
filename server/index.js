@@ -29,6 +29,9 @@ app.use('/api/excerpt', excerptRoutes);
 const settingsRoutes = require('./routes/settings');
 app.use('/api/settings', settingsRoutes);
 
+const chatRoutes = require('./routes/chat');
+app.use('/api/chat', chatRoutes);
+
 const { startScheduler } = require('./cron/scheduler');
 startScheduler();
 
