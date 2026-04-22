@@ -7,8 +7,8 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'fake-key');
 
 const generateExcerpt = async (bookTitle, bookAuthor) => {
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-        const prompt = `Generate a short, inspiring, random excerpt (about 1-2 paragraphs) from the book "${bookTitle}" by ${bookAuthor}. Format it as plain text.`;
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        const prompt = `Generate a short, inspiring, random excerpt (about 1-2 paragraphs) from the book "${bookTitle}" by ${bookAuthor}. I will be using this prompt daily, so make sure not to generate the same excerpt everytime. Format it as plain text.`;
 
         const result = await model.generateContent(prompt);
         const response = await result.response;
@@ -21,7 +21,7 @@ const generateExcerpt = async (bookTitle, bookAuthor) => {
 
 const chatWithBook = async (title, author, userMessage, history = []) => {
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         // Construct chat history for Gemini
         // History format from client: [{ role: 'user', parts: [{ text: '...' }] }, { role: 'model', parts: [...] }]
