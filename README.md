@@ -40,7 +40,7 @@ A personalized digital library to track your reading journey, discover insights 
 1.  **Clone the repository**
     ```bash
     git clone <repository-url>
-    cd living-bookshelf
+    cd living-library
     ```
 
 2.  **Install Server Dependencies**
@@ -93,6 +93,44 @@ EMAIL_PASS=your_app_specific_password
     Client will run on `http://localhost:5173`.
 
 3.  Open your browser and navigate to `http://localhost:5173`!
+
+## Deployment (AWS EC2)
+
+The application is configured to run on an AWS EC2 instance using **Nginx** as a reverse proxy and **PM2** for process management.
+
+### Initial Setup Overview
+1. Clone the repository on your EC2 instance.
+2. Install dependencies for both `server` and `client`.
+3. Configure your `.env` file in the `server` directory.
+4. Build the frontend client: `cd client && npm run build`
+5. Start the backend server with PM2: `cd server && pm2 start index.js --name api`
+6. Configure Nginx to serve static files from `client/dist` and proxy API requests to `http://localhost:5001`.
+7. Ensure correct permissions for Nginx to access the web directory (e.g., `chmod 755 /home/ubuntu`).
+
+### Redeploying Updates
+
+When deploying updates to your EC2 instance, follow these steps:
+
+**1. Pull Changes**
+```bash
+cd ~/living-library
+git pull origin main
+```
+
+**2. Update Backend**
+```bash
+cd server
+npm install  # (Only if package.json changed)
+pm2 restart api
+```
+
+**3. Update Frontend**
+```bash
+cd ../client
+npm install  # (Only if package.json changed)
+npm run build
+# No restart needed (Nginx serves static files instantly)
+```
 
 ## License
 
