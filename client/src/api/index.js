@@ -70,6 +70,7 @@ export const authApi = {
 
 // Books API
 export const booksApi = {
+    searchGoogleBooks: (query, token) => request(`/api/books/search?q=${encodeURIComponent(query)}`, { token }),
     getAll: (token) => request('/api/books', { token }),
     getById: (id, token) => request(`/api/books/${encodeURIComponent(id)}`, { token }),
     create: (bookData, token) => request('/api/books', {

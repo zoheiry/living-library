@@ -17,8 +17,7 @@ export default function BookSearch({ onBookAdded, onClose }) {
 
         setLoading(true);
         try {
-            const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`);
-            const data = await res.json();
+            const data = await booksApi.searchGoogleBooks(query, token);
             setResults(data.items || []);
         } catch (err) {
             console.error("Search failed", err);

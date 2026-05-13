@@ -10,6 +10,30 @@ const authMiddleware = require('../middleware/auth');
 // Apply middleware to all routes
 router.use(authMiddleware);
 
+// Search books via Google Books API
+router.get('/search', async (req, res) => {
+    const query = req.query.q;
+    if (!query) {
+        return res.status(400).json({ error: "Query parameter 'q' is required" });
+    }
+
+    try {
+        const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+        const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${apiKey}`;
+
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`Google Books API responded with status: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error("Error searching books:", error);
+        res.status(500).json({ error: "Could not search books" });
+    }
+});
+
 // Get all books for a specific user
 router.get('/', async (req, res) => {
     const userId = req.user.userId;
